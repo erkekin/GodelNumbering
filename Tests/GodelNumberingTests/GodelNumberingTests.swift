@@ -7,7 +7,7 @@ final class GodelNumberingTests: XCTestCase {
   func test_hasFactorSimple() {
     let tree = ExpressionTree(prefixExpression: "^ 2 3")
     
-    XCTAssertTrue(tree.has(factor: tree))
+    XCTAssertTrue(tree.hasPrefix(factor: tree))
   }
 
   func test_hasFactor() {
@@ -15,8 +15,8 @@ final class GodelNumberingTests: XCTestCase {
     let left = ExpressionTree(prefixExpression: "^ 2 3")
     let right = ExpressionTree(prefixExpression: "^ 3 2")
     
-    XCTAssertTrue(tree.has(factor: left))
-    XCTAssertTrue(tree.has(factor: right))
+    XCTAssertTrue(tree.hasPrefix(factor: left))
+    XCTAssertTrue(tree.hasPrefix(factor: right))
   }
 
   func test_hasFactorComplex() {
@@ -28,12 +28,10 @@ final class GodelNumberingTests: XCTestCase {
     
     let _2and3 = ExpressionTree(prefixExpression: "* ^ 2 3 ^ 3 2")
     
-    XCTAssertTrue(tree.has(factor: _7))
-    XCTAssertTrue(tree.has(factor: _2))
-    XCTAssertTrue(tree.has(factor: _3))
-    XCTAssertTrue(tree.has(factor: _5))
-    
-    XCTAssertTrue(tree.has(factor: _2and3))
+    XCTAssertTrue(tree.hasPrefix(factor: _7))
+    XCTAssertTrue(tree.hasPrefix(factor: _2))
+    XCTAssertTrue(tree.hasPrefix(factor: _3))
+    XCTAssertTrue(tree.hasPrefix(factor: _5))
+    XCTAssertTrue(tree.hasPrefix(factor: _2and3))
   }
-
 }

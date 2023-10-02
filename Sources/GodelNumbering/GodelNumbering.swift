@@ -2,7 +2,7 @@ import ExpressionTree
 import BinaryTree
 
 extension ExpressionTree where Descendent == BinaryChildren<Token>  {
-  func has(factor branch: ExpressionTree) -> Bool {
+  func hasPrefix(factor branch: ExpressionTree) -> Bool {
     guard self != branch else { return true }
     guard case .funct(.multiply) = value, let descendent = descendent else { return false }
     switch descendent {
@@ -10,9 +10,10 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
       return true
       
     default:
-      if descendent.left.has(factor: branch) { return true }
-      if descendent.right.has(factor: branch) { return true }
+      if descendent.left.hasPrefix(factor: branch) { return true }
+      if descendent.right.hasPrefix(factor: branch) { return true }
       return false
     }
   }
 }
+

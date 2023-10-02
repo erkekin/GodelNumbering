@@ -11,7 +11,7 @@ let package = Package(
             targets: ["GodelNumbering"]),
     ],
     dependencies: [
-      .package(url: "https://github.com/swift-tree/ExpressionTree.git", exact: "0.1.7")
+      .package(url: "https://github.com/swift-tree/ExpressionTree.git", exact: "1.0.0")
     ],
     targets: [
         .target(
