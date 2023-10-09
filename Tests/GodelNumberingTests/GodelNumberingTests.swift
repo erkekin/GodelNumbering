@@ -72,12 +72,19 @@ final class GodelNumberingTests: XCTestCase {
   }
   
   func test_proof() {
-    let tree = ExpressionTree([
+    let tree1 = ExpressionTree([
       ExpressionTree("* ^ 2 1 ^ 3 1"),
       ExpressionTree("* ^ 2 2 ^ 3 2"),
       ExpressionTree("* ^ 2 3 ^ 3 3")
     ])
     
-    XCTAssertTrue(tree.hasPrefix(factor: ExpressionTree("^ 2 * ^ 2 1 ^ 3 1")))
+    let tree2 = ExpressionTree([
+      ExpressionTree([1, 1]),
+      ExpressionTree([2, 2]),
+      ExpressionTree([3, 3])
+    ])
+    
+    XCTAssertEqual(tree1, tree2)
+    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree("^ 2 * ^ 2 1 ^ 3 1")))
   }
 }
