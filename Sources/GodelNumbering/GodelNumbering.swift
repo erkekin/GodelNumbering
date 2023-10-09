@@ -18,20 +18,24 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
       }
   }
 
-  public static func build(exponentials: [Int]) -> ExpressionTree {
+  public init(_ exponentials: [Int]) {
+    self = ExpressionTree(exponentials.map{ ExpressionTree.leaf(.num($0)) })
+  }
+  
+  public init( _ exponentials: [ExpressionTree]) {
     var factors = Array(exponentials.enumerated())
     let firstFactor = factors.removeFirst()
-    let firstFactorTree = ExpressionTree.node(value: .funct(.exponential), .init(.leaf(.num(Self.primesBig[firstFactor.offset])), .leaf(.num(firstFactor.element))))
+    let firstFactorTree = ExpressionTree.node(value: .funct(.exponential), .init(.leaf(.num(Self.primesBig[firstFactor.offset])), firstFactor.element))
     
-    return factors
+    self = factors
       .map{ index, exponential in
-          .node(value: .funct(.exponential), .init(.leaf(.num(Self.primesBig[index])), .leaf(.num(exponential))))
+          .node(value: .funct(.exponential), .init(.leaf(.num(Self.primesBig[index])), exponential))
       }
       .reduce(firstFactorTree) { partialResult, tree in
           .node(value: .funct(.multiply), .init(partialResult, tree))
       }
   }
-
+  
   func hasPrefix(factor branch: ExpressionTree) -> Bool {
     guard self != branch else { return true }
     guard case .funct(.multiply) = value, let descendent = descendent else { return false }
@@ -46,9 +50,9 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
     }
   }
   
-  public static func sub(self: [Int], int: Int, proof: [Int]) -> ExpressionTree {
+  public static func substitute(self: [Int], int: Int, proof: [Int]) -> ExpressionTree {
     let expressions: [ExpressionTree] = self.map { exponential in
-      int == exponential ? .build(exponentials: proof) : .leaf(.num(exponential))
+      int == exponential ? ExpressionTree(proof) : .leaf(.num(exponential))
     }
     
     return ExpressionTree.subst(expressions)
@@ -56,7 +60,7 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
   
   public static func selfSubstitute(self: [Int], int: Int) -> ExpressionTree {
     let expressions: [ExpressionTree] = self.map { exponential in
-      int == exponential ? .build(exponentials: self) : .leaf(.num(exponential))
+      int == exponential ? ExpressionTree(self) : .leaf(.num(exponential))
     }
     
     return ExpressionTree.subst(expressions)
