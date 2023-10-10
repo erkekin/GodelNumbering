@@ -85,6 +85,19 @@ final class GodelNumberingTests: XCTestCase {
     ])
     
     XCTAssertEqual(tree1, tree2)
-    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree("^ 2 * ^ 2 1 ^ 3 1")))
+    
+    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree([
+      ExpressionTree([1, 1]),
+      ExpressionTree([2, 2]),
+      ExpressionTree([3, 3])
+    ])))
+    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree([
+      ExpressionTree([1, 1]),
+      ExpressionTree([2, 2]),
+    ])))
+    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree([
+      ExpressionTree([1, 1]),
+    ])))
+    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree("^ 5 * ^ 2 3 ^ 3 3")))
   }
 }

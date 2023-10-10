@@ -46,4 +46,3 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
     substitute(self: self, int: int, proof: self)
   }
 }
-
