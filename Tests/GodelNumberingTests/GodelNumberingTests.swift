@@ -100,4 +100,13 @@ final class GodelNumberingTests: XCTestCase {
     ])))
     XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree("^ 5 * ^ 2 3 ^ 3 3")))
   }
+  
+  func test_formula_zero_equals_zero() {
+    XCTAssertEqual(ExpressionTree(formula: "0=0").evaluate, 243_000_000)
+  }
+  
+  func test_formula1_no_arithmetic_overflow() {
+    XCTAssertEqual(ExpressionTree(formula: "(∃x)(x=sy)"), ExpressionTree([8, 4, 11, 9, 8, 11, 5, 7, 13, 9]))
+  }
 }
+
