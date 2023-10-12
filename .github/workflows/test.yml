@@ -12,6 +12,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+      with:
+        filter: blob:none
     - name: Run tests
       run: swift test
+

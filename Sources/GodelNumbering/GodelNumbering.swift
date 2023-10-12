@@ -148,9 +148,6 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
   }
   
   public init(formula: String) {
-    dump(formula
-      .compactMap(Proposition.init)
-      .map(\.godelNumber))
     self = ExpressionTree(
       formula
       .compactMap(Proposition.init)

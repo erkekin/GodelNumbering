@@ -107,6 +107,7 @@ final class GodelNumberingTests: XCTestCase {
   
   func test_formula1_no_arithmetic_overflow() {
     XCTAssertEqual(ExpressionTree(formula: "(∃x)(x=sy)"), ExpressionTree([8, 4, 11, 9, 8, 11, 5, 7, 13, 9]))
+    print(ExpressionTree(formula: "(∃x)(x=sy)").description  )
   }
 }
 
