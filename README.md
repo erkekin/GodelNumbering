@@ -1,12 +1,11 @@
 # GodelNumbering
 Godel numbering with Swift
 
-This project is an experimentation on Godel Encoding. Project depends on my other toy swift packages under https://github.com/swift-tree, specifically ExpressionTree, which helped me deal with big numbers in this project. Fun stuff, have a look at the tests.
-
-ExpressionTree(formula: "(∃x)(x=sy)")
+This project is an experimentation on Godel Encoding. Project depends on my other toy swift packages under https://github.com/swift-tree, specifically `ExpressionTree`, which helped me deal with big numbers in this project. Fun stuff, have a look at the tests.
 
 ```swift
-ExpressionTree(formula: "(∃x)(x=sy)")
+let godelNumber = ExpressionTree(formula: "(∃x)(x=sy)")
+godelNumber.description
 
         ┌── 9
     ┌── ^
