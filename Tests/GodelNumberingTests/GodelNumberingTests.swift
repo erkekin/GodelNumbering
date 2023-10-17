@@ -4,13 +4,13 @@ import ExpressionTree
 
 final class GodelNumberingTests: XCTestCase {
   
-  func test_hasFactorSimple() {
+  func test_hasPrefix_simple() {
     let tree = ExpressionTree("^ 2 3")
     
     XCTAssertTrue(tree.hasPrefix(factor: tree))
   }
   
-  func test_hasFactor() {
+  func test_hasPrefix() {
     let tree = ExpressionTree("* ^ 2 3 ^ 3 2")
     let left = ExpressionTree("^ 2 3")
     let right = ExpressionTree("^ 3 2")
@@ -19,7 +19,7 @@ final class GodelNumberingTests: XCTestCase {
     XCTAssertTrue(tree.hasPrefix(factor: right))
   }
   
-  func test_hasFactorComplex() {
+  func test_hasPrefix_complex() {
     let tree = ExpressionTree("* * * ^ 2 3 ^ 3 2 ^ 5 4 ^ 7 1")
     let _7 = ExpressionTree("^ 7 1")
     let _2 = ExpressionTree("^ 2 3")
@@ -35,7 +35,7 @@ final class GodelNumberingTests: XCTestCase {
     XCTAssertTrue(tree.hasPrefix(factor: _2and3))
   }
   
-  func test_build() {
+  func test_complex_hasPrefix() {
     let tree = ExpressionTree("* * * * * * * * * ^ 2 8 ^ 3 4 ^ 5 13 ^ 7 9 ^ 11 8 ^ 13 13 ^ 17 5 ^ 19 7 ^ 23 17 ^ 29 9")
     XCTAssertTrue(tree.hasPrefix(factor: ExpressionTree("^ 2 8")))
     XCTAssertTrue(tree.hasPrefix(factor: ExpressionTree("^ 3 4")))
@@ -51,7 +51,7 @@ final class GodelNumberingTests: XCTestCase {
     XCTAssertEqual(tree, ExpressionTree([8, 4, 13, 9, 8, 13, 5, 7, 17, 9]))
   }
   
-  func test_sub() {
+  func test_substitute() {
     let expected_substituted3_to_self = ExpressionTree("* ^ 2 * ^ 2 3 ^ 3 2 ^ 3 2")
     let actual = ExpressionTree.substitute(self: [3, 2], int: 3, proof: [3, 2])
     

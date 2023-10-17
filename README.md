@@ -5,7 +5,7 @@ This project is an experimentation on Godel Encoding. Project depends on my othe
 
 ```swift
 let godelNumber = ExpressionTree(formula: "(∃x)(x=sy)")
-godelNumber.description
+print(godelNumber.description)
 
         ┌── 9
     ┌── ^
