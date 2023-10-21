@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-tree/BinaryTree.git",
       "state" : {
-        "revision" : "c56a403ed2499d64bbfa57aafa6d3862e77376ff",
-        "version" : "1.0.5"
+        "revision" : "1cf86f3f40e96a58018ce721cbea410bfbff6dce",
+        "version" : "1.0.6"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-tree/ExpressionTree.git",
       "state" : {
-        "revision" : "8fc901577923ba6c93dfab0f15c4bdfaf43d0acf",
-        "version" : "2.0.0"
+        "revision" : "1a852594b936f172e2de1ba81371e77dd4c2ed75",
+        "version" : "2.0.1"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-tree/Tree.git",
       "state" : {
-        "revision" : "848b252416b04bf2823bcf3dccd171be4a0a9a41",
-        "version" : "1.0.2"
+        "revision" : "54b722f1f74127dfc87aa74f5b96b784f831df76",
+        "version" : "1.0.3"
       }
     }
   ],
