@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-tree/ExpressionTree.git",
       "state" : {
-        "revision" : "1a852594b936f172e2de1ba81371e77dd4c2ed75",
-        "version" : "2.0.1"
+        "revision" : "74de15c7d180a512681538543960ce5dfaed6bcd",
+        "version" : "2.0.2"
       }
     },
     {

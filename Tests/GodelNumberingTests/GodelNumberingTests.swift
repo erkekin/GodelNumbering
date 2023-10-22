@@ -3,6 +3,17 @@ import ExpressionTree
 @testable import GodelNumbering
 
 final class GodelNumberingTests: XCTestCase {
+  private var tree: ExpressionTree!
+  
+  override func setUp() {
+    super.setUp()
+    tree = ExpressionTree("* ^ 2 3 ^ 3 2")
+  }
+  
+  override func tearDown() {
+    tree = nil
+    super.tearDown()
+  }
   
   func test_hasPrefix_simple() {
     let tree = ExpressionTree("^ 2 3")
@@ -11,7 +22,6 @@ final class GodelNumberingTests: XCTestCase {
   }
   
   func test_hasPrefix() {
-    let tree = ExpressionTree("* ^ 2 3 ^ 3 2")
     let left = ExpressionTree("^ 2 3")
     let right = ExpressionTree("^ 3 2")
     
@@ -26,7 +36,7 @@ final class GodelNumberingTests: XCTestCase {
     let _3 = ExpressionTree("^ 3 2")
     let _5 = ExpressionTree("^ 5 4")
     
-    let _2and3 = ExpressionTree("* ^ 2 3 ^ 3 2")
+    let _2and3 = tree
     
     XCTAssertTrue(tree.hasPrefix(factor: _7))
     XCTAssertTrue(tree.hasPrefix(factor: _2))
@@ -105,9 +115,24 @@ final class GodelNumberingTests: XCTestCase {
     XCTAssertEqual(ExpressionTree(formula: "0=0").evaluate, 243_000_000)
   }
   
-  func test_formula1_no_arithmetic_overflow() {
-    XCTAssertEqual(ExpressionTree(formula: "(∃x)(x=sy)"), ExpressionTree([8, 4, 11, 9, 8, 11, 5, 7, 13, 9]))
-    print(ExpressionTree(formula: "(∃x)(x=sy)").description  )
+  func test_formula1_no_arithmetic_overflow() async throws {
+    tree = ExpressionTree(formula: "(∃x)(x=sy)")
+    
+    XCTAssertEqual(tree, ExpressionTree([8, 4, 11, 9, 8, 11, 5, 7, 13, 9]))
+    
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    let data = try encoder.encode(tree)
+    
+    XCTAssertNotNil(String(data: data, encoding: .utf8))
+  }
+  
+  func test_can_encode() async throws {
+    tree = ExpressionTree(formula: "(∃x)(x=sy)")
+    let encoder = JSONEncoder()
+    let data = try encoder.encode(tree)
+    
+    XCTAssertNotNil(String(data: data, encoding: .utf8))
   }
 }
 
