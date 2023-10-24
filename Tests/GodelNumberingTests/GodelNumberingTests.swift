@@ -88,26 +88,26 @@ final class GodelNumberingTests: XCTestCase {
       ExpressionTree("* ^ 2 3 ^ 3 3")
     ])
     
-    let tree2 = ExpressionTree([
+    let tree2 = ExpressionTree(
       ExpressionTree([1, 1]),
       ExpressionTree([2, 2]),
       ExpressionTree([3, 3])
-    ])
+    )
     
     XCTAssertEqual(tree1, tree2)
     
-    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree([
+    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree(
       ExpressionTree([1, 1]),
       ExpressionTree([2, 2]),
       ExpressionTree([3, 3])
-    ])))
-    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree([
+    )))
+    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree(
       ExpressionTree([1, 1]),
-      ExpressionTree([2, 2]),
-    ])))
-    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree([
-      ExpressionTree([1, 1]),
-    ])))
+      ExpressionTree([2, 2])
+    )))
+    XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree(
+      ExpressionTree([1, 1])
+    )))
     XCTAssertTrue(tree1.hasPrefix(factor: ExpressionTree("^ 5 * ^ 2 3 ^ 3 3")))
   }
   
@@ -136,3 +136,10 @@ final class GodelNumberingTests: XCTestCase {
   }
 }
 
+import BinaryTree
+
+extension ExpressionTree where Descendent == BinaryChildren<Token>  {
+  init(_ trees: ExpressionTree ...) {
+    self = .init(trees)
+  }
+}
