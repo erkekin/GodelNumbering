@@ -49,12 +49,6 @@ print(godelNumber.description)
 ```
 
 
-Trying to prove here, that axiomatic set of proofs are not complete and consistent at the same time. That is, that famous statement: "This statement is false."
-
-See these papers and posts to get more information.
-
-- https://arxiv.org/pdf/math/0104025.pdf
-- https://www.wired.com/story/how-godels-proof-works/
 
 ## A Note on the Gödel Formula's Finiteness
 
@@ -65,3 +59,6 @@ However, it's worth noting that there are alternative perspectives on this aspec
 Ferreira's argument suggests that if G is comprehended as a self-referential statement, or if there's an infinite set of provable well-formed formulas with one free variable, then the traditional construction of G leads to a contradiction regarding the finiteness of its Gödel number. Specifically, he posits that the "name" (Gödel number) of the formula, when constructed to be self-referential, would necessarily be smaller than the formula it represents, leading to an infinite regress or an unresolvable size discrepancy.
 
 While this project adheres to the conventional understanding for practical implementation and demonstration of the core theorem, it's important to acknowledge these deeper theoretical discussions that explore the foundational assumptions of Gödel's groundbreaking work.
+
+- https://arxiv.org/pdf/math/0104025.pdf
+- https://www.wired.com/story/how-godels-proof-works/
