@@ -53,4 +53,9 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
   public static func selfSubstitute(self: [Int], int: Int) -> ExpressionTree {
     substitute(self: self, int: int, proof: self)
   }
+
+  public static func sub(gn: [Int], variable: Int, term: [Int]) -> ExpressionTree {
+    let newGN = gn.flatMap { $0 == variable ? term : [$0] }
+    return ExpressionTree(newGN)
+  }
 }
