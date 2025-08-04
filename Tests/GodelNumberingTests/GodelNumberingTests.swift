@@ -85,7 +85,7 @@ final class GodelNumberingTests: XCTestCase {
     let formula = [8, 4, 11, 9, 8, 11, 5, 7, 13, 9] // (∃x)(x=sy)
     let term = [6] // 0
     let expected = ExpressionTree(formula: "(∃x)(x=s0)")
-    let actual = ExpressionTree.sub(gn: formula, variable: 13, term: term)
+    let actual = ExpressionTree.sub(gn: formula, variable: .y, term: term)
     XCTAssertEqual(actual, expected)
   }
   
