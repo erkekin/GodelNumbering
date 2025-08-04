@@ -5,7 +5,8 @@ public struct GStatement {
   let gn: [Int]
 
   public func isProvable() -> Bool {
-    let substituted = ExpressionTree.sub(gn: gn, variable: 13, term: gn)
+    let y = Proposition.numerical(.y).godelNumber
+    let substituted = ExpressionTree.sub(gn: gn, variable: y, term: gn)
     return proof.isProvable(formula: substituted)
   }
 }
