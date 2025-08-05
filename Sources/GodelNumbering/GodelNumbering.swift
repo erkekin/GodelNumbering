@@ -25,8 +25,8 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
   public init(formula: String) {
     self = ExpressionTree(
       formula
-      .compactMap(Proposition.init)
-      .map(\.godelNumber)
+        .compactMap(Proposition.init)
+        .map(\.godelNumber)
     )
   }
   
@@ -34,13 +34,13 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
     guard self != branch else { return true }
     guard case .funct(.multiply) = value, let descendent = descendent else { return false }
     switch descendent {
-    case .init(branch, descendent.right), .init(descendent.left, branch):
-      return true
-      
-    default:
-      if descendent.left.hasPrefix(factor: branch) { return true }
-      if descendent.right.hasPrefix(factor: branch) { return true }
-      return false
+      case .init(branch, descendent.right), .init(descendent.left, branch):
+        return true
+        
+      default:
+        if descendent.left.hasPrefix(factor: branch) { return true }
+        if descendent.right.hasPrefix(factor: branch) { return true }
+        return false
     }
   }
   
@@ -53,7 +53,7 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
   static func selfSubstitute(self: [Int], int: Int) -> ExpressionTree {
     substituteNumberWithFormulaEncoding(self: self, int: int, proof: self)
   }
-
+  
   static func substituteVariable(gn: [Int], variable: Proposition.NUMERICAL_VARIABLES, term: [Int]) -> ExpressionTree {
     let newGN = gn.flatMap { $0 == variable.godelNumber ? term : [$0] }
     return ExpressionTree(newGN)
