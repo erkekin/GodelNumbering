@@ -134,6 +134,16 @@ final class GodelNumberingTests: XCTestCase {
     
     XCTAssertNotNil(String(data: data, encoding: .utf8))
   }
+
+  
+  func test_can_encode1() async throws {
+    tree = ExpressionTree(formula: "~(0 = sx)")
+    let encoder = JSONEncoder()
+    let data = try encoder.encode(tree)
+    print(tree.debugDescription)
+    XCTAssertNotNil(String(data: data, encoding: .utf8))
+  }
+  
   
   func test_can_encode() async throws {
     tree = ExpressionTree(formula: "(∃x)(x=sy)")

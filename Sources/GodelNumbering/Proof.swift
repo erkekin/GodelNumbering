@@ -1,10 +1,9 @@
 import ExpressionTree
 
-public struct Proof {
-  let axioms: [ExpressionTree]
+struct Proof {
   let theorems: [ExpressionTree]
 
-  public func isProvable(formula: ExpressionTree) -> Bool {
+  func isProvable(formula: ExpressionTree) -> Bool {
     return theorems.contains(formula)
   }
 }
