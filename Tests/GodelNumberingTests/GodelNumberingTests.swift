@@ -61,9 +61,9 @@ final class GodelNumberingTests: XCTestCase {
     XCTAssertEqual(tree, ExpressionTree([8, 4, 13, 9, 8, 13, 5, 7, 17, 9]))
   }
   
-  func test_substitute() {
+  func test_substituteNumberWithFormulaEncoding() {
     let expected_substituted3_to_self = ExpressionTree("* ^ 2 * ^ 2 3 ^ 3 2 ^ 3 2")
-    let actual = ExpressionTree.substitute(self: [3, 2], int: 3, proof: [3, 2])
+    let actual = ExpressionTree.substituteNumberWithFormulaEncoding(self: [3, 2], int: 3, proof: [3, 2])
     
     XCTAssertEqual(actual, expected_substituted3_to_self)
   }
@@ -81,11 +81,12 @@ final class GodelNumberingTests: XCTestCase {
     XCTAssertEqual(actual, expected)
   }
 
-  func test_sub() {
+  func test_substituteVariable() {
     let formula = [8, 4, 11, 9, 8, 11, 5, 7, 13, 9] // (∃x)(x=sy)
     let term = [6] // 0
     let expected = ExpressionTree(formula: "(∃x)(x=s0)")
-    let actual = ExpressionTree.sub(gn: formula, variable: .y, term: term)
+    let actual = ExpressionTree.substituteVariable(gn: formula, variable: .y, term: term)
+    
     XCTAssertEqual(actual, expected)
   }
   
@@ -140,7 +141,7 @@ final class GodelNumberingTests: XCTestCase {
     tree = ExpressionTree(formula: "~(0 = sx)")
     let encoder = JSONEncoder()
     let data = try encoder.encode(tree)
-    print(tree.debugDescription)
+    
     XCTAssertNotNil(String(data: data, encoding: .utf8))
   }
   

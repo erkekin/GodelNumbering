@@ -44,17 +44,17 @@ extension ExpressionTree where Descendent == BinaryChildren<Token>  {
     }
   }
   
-  static func substitute(self: [Int], int: Int, proof: [Int]) -> ExpressionTree {
+  static func substituteNumberWithFormulaEncoding(self: [Int], int: Int, proof: [Int]) -> ExpressionTree {
     ExpressionTree(self.map { exponential in
       int == exponential ? ExpressionTree(proof) : .leaf(.num(exponential))
     })
   }
   
   static func selfSubstitute(self: [Int], int: Int) -> ExpressionTree {
-    substitute(self: self, int: int, proof: self)
+    substituteNumberWithFormulaEncoding(self: self, int: int, proof: self)
   }
 
-  static func sub(gn: [Int], variable: Proposition.NUMERICAL_VARIABLES, term: [Int]) -> ExpressionTree {
+  static func substituteVariable(gn: [Int], variable: Proposition.NUMERICAL_VARIABLES, term: [Int]) -> ExpressionTree {
     let newGN = gn.flatMap { $0 == variable.godelNumber ? term : [$0] }
     return ExpressionTree(newGN)
   }

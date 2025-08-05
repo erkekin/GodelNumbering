@@ -16,7 +16,7 @@ final class GStatementTests: XCTestCase {
   // Checks that a GStatement is provable if the theorem list contains the substituted formula.
   func test_provable_leads_to_contradiction() {
     let gn = [8, 4, 11, 9, 8, 11, 5, 7, 13, 9] // (∃x)(x=sy)
-    let substituted = ExpressionTree.sub(gn: gn, variable: .y, term: gn)
+    let substituted = ExpressionTree.substituteVariable(gn: gn, variable: .y, term: gn)
     let theorems = [substituted]
     let proof = Proof(theorems: theorems)
     let gStatement = GStatement(proof: proof, gn: gn)
@@ -38,7 +38,7 @@ final class GStatementTests: XCTestCase {
   func test_differentGodelNumbers_notProvable() {
     let gn = [8, 4, 11, 9, 8, 11, 5, 7, 13, 9]
     let differentGn = [1, 2, 3, 4]
-    let substituted = ExpressionTree.sub(gn: differentGn, variable: .y, term: differentGn)
+    let substituted = ExpressionTree.substituteVariable(gn: differentGn, variable: .y, term: differentGn)
     let theorems = [substituted]
     let proof = Proof(theorems: theorems)
     let gStatement = GStatement(proof: proof, gn: gn)
@@ -49,7 +49,7 @@ final class GStatementTests: XCTestCase {
   // Checks that provability succeeds if any theorem in the list matches the substituted formula.
   func test_multipleTheorems_oneMatches() {
     let gn = [8, 4, 11, 9, 8, 11, 5, 7, 13, 9]
-    let matching = ExpressionTree.sub(gn: gn, variable: .y, term: gn)
+    let matching = ExpressionTree.substituteVariable(gn: gn, variable: .y, term: gn)
     let nonMatching = ExpressionTree(formula: "1=1")
     let theorems = [nonMatching, matching]
     let proof = Proof(theorems: theorems)
@@ -62,8 +62,8 @@ final class GStatementTests: XCTestCase {
   func test_substitution_affectsProvability() {
     let gn = [8, 4, 11, 9, 8, 11, 5, 7, 13, 9]
     let differentTerm = [1, 2, 3]
-    let substitutedWithGn = ExpressionTree.sub(gn: gn, variable: .y, term: gn)
-    let substitutedWithDifferentTerm = ExpressionTree.sub(gn: gn, variable: .y, term: differentTerm)
+    let substitutedWithGn = ExpressionTree.substituteVariable(gn: gn, variable: .y, term: gn)
+    let substitutedWithDifferentTerm = ExpressionTree.substituteVariable(gn: gn, variable: .y, term: differentTerm)
     
     let proof1 = Proof(theorems: [substitutedWithGn])
     let gStatement1 = GStatement(proof: proof1, gn: gn)
@@ -77,7 +77,7 @@ final class GStatementTests: XCTestCase {
   // Ensures that modifying the original theorems array after creating the Proof does NOT retroactively affect existing GStatement results.
   func test_proofImmutability() {
     let gn = [8, 4, 11, 9, 8, 11, 5, 7, 13, 9]
-    let substituted = ExpressionTree.sub(gn: gn, variable: .y, term: gn)
+    let substituted = ExpressionTree.substituteVariable(gn: gn, variable: .y, term: gn)
     var theorems = [substituted]
     let proof = Proof(theorems: theorems)
     let gStatement = GStatement(proof: proof, gn: gn)
